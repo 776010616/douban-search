@@ -280,7 +280,8 @@
         history.go(-1);
       });
       searchInput.addEventListener('animationend',function(){
-         searchInput.classList.remove('shake');
+          /*searchInput.classList.remove('shake');*/
+         this.className='';
       })
     }
   /*// 页面加载完成事件 页面ready 绑定事件， 执行代码

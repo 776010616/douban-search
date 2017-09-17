@@ -7,23 +7,24 @@
   <title>豆瓣搜索</title>
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <style>
-      * {
+    * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
       /*清理浏览器默认的高亮*/
       -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     }
-    
-    ui,li {
+
+    ui,
+    li {
       list-style: none;
     }
-    
+
     a {
       text-decoration: none;
       color: #42bd56;
     }
-    
+
     input,
     textarea,
     button,
@@ -31,12 +32,12 @@
     a {
       -webkit-tap-highlight-color: transparent;
     }
-    
+
     html.is-scrolling-disabled {
       height: 100%;
       overflow: hidden;
     }
-    
+
     body {
       margin: 0;
       color: #111;
@@ -44,7 +45,7 @@
       font-family: Arial, sans-serif;
       position: relative;
     }
-    
+
     .TalionNav {
       position: fixed;
       left: 0;
@@ -53,7 +54,7 @@
       z-index: 9999;
       background: #fff;
     }
-    
+
     .TalionNav-secondary {
       position: absolute;
       left: 0;
@@ -63,7 +64,7 @@
       z-index: 9999;
       background: #fff;
     }
-    
+
     .TalionNav-secondary a.close-nav {
       position: absolute;
       top: 20px;
@@ -71,12 +72,12 @@
       font-size: 16px;
       color: #42bd56;
     }
-    
+
     .TalionNav-secondary form {
       border-bottom: 1px solid #f3f3f3;
       padding: 15px 18px 15px 60px;
     }
-    
+
     .TalionNav-secondary input[type=search] {
       box-sizing: border-box;
       /*重置浏览器对元素的长相定义*/
@@ -95,14 +96,14 @@
       padding: 0 5px;
     }
     /*当点击搜索框时，获取焦点*/
-    
+
     .TalionNav-secondary input[type=search]:focus {
       background-image: none;
       /*将原有图片覆盖*/
       outline: 0;
       /*黄色边框消失*/
     }
-    
+
     .TalionNav-secondary ul {
       padding-top: 25px;
       overflow: hidden;
@@ -114,18 +115,18 @@
       justify-content: space-around;
       /*使其居中，周围围绕着一些间歇  有center end space-between在之间加间歇，space-round在边上加*/
     }
-    
+
     .TalionNav-secondary li {
       width: 33.33%;
     }
-    
+
     .TalionNav-secondary li div {
       float: left;
       position: relative;
       left: 50%;
       top: 0;
     }
-    
+
     .TalionNav-secondary li a {
       display: block;
       text-align: center;
@@ -134,14 +135,14 @@
       left: -50%;
       top: 0;
     }
-    
+
     .TalionNav-secondary strong {
       display: block;
       font-weight: 400;
       font-size: 24px;
       line-height: 28px;
     }
-    
+
     .TalionNav-secondary span {
       display: block;
       color: #999;
@@ -149,43 +150,56 @@
       font-size: 12px;
       letter-spacing: 1px;
     }
-    
+
     .TalionNav-secondary .navBottom {
       width: 100%;
       border-bottom: 1px solid #f3f3f3;
     }
-   .TalionNav-secondary .navBottom .nav-item {
+
+    .TalionNav-secondary .navBottom .nav-item {
       border-top: 1px solid #f3f3f3;
       padding: 13px 0;
     }
-    
-      
-  .TalionNav-secondary .navBottom .nav-item a {
+
+
+    .TalionNav-secondary .navBottom .nav-item a {
       margin: 0 auto;
       text-align: center;
       width: 50%;
       font-size: 15px;
       color: #42bd65;
-      display: inline-block;/*缺陷，会添加间隙  方法，将a标签换行删除*/
+      display: inline-block;
+      /*缺陷，会添加间隙  方法，将a标签换行删除*/
     }
-    
+
     .TalionNav-secondary .navBottom .nav-item a:first-child {
       border-right: 1px solid #e5e5e5;
     }
 
-    .shake{
+    .shake {
       -webkit-animation: shake 2s 1;
       animation: shake 1s 1;
+      /*或者animation: shake 1s alternate;*/
+      /*换成animation: shake 10s linear forwards ifinite看效果*/
     }
-    @keyframes shake{
-      0%,20%,40%,60%,80%,100%{
+
+    @keyframes shake {
+      0%,
+      20%,
+      40%,
+      60%,
+      80%,
+      100% {
         transform: translateX(10px);
       }
-      10%,30%,50%,70%,90%{
+      10%,
+      30%,
+      50%,
+      70%,
+      90% {
         transform: translateX(-10px);
       }
     }
-    
   </style>
 </head>
 
@@ -237,8 +251,6 @@
             </div>
           </li>
 
-
-
         </ul>
         <div class="navBottom">
           <div class="nav-item">
@@ -254,43 +266,35 @@
   <script src="http://cdn.bootcss.com/jquery/2.0.3/jquery.min.js"></script>
   <script>
     const closeA = document.querySelector('.close-nav');
-    const searchInput=document.querySelector('input[name="query"]');
-    const searchForm=document.getElementById('searchForm');
-    
-
+    const searchInput = document.querySelector('input[name="query"]');
+    const searchForm = document.getElementById('searchForm');
     window.onload = function () {
-      searchForm.addEventListener('submit',function(event){
+      searchForm.addEventListener('submit', function (event) {
         event.preventDefault();/*阻止提交*/
-
-        const keyword=searchInput.value.trim();
-        /*alert(keyword);*/
-        if(keyword=='')
-       /* {alert('请输入要搜索的内容');}*/
-       {
-        searchInput.classList.add('shake');
-       }
-        else{
+        const keyword = searchInput.value.trim();
+        if (keyword == '') {
+          searchInput.classList.add('shake');
+        }
+        else {
           this.submit();/*this指向表单*/
         }
       });
       closeA.addEventListener('click', function () {
-        /*// 向退
-        // history 对象 你的所有浏览记录*/
-        /* BOM Browser Object Model  DOM*/
+        /* history 对象 你的所有浏览记录
+       BOM Browser Object Model  DOM*/
         history.go(-1);
       });
-      searchInput.addEventListener('animationend',function(){
-          /*searchInput.classList.remove('shake');*/
-         this.className='';
+      searchInput.addEventListener('animationend', function () {
+        /*searchInput.classList.remove('shake');*/
+        this.className = '';
       })
     }
-  /*// 页面加载完成事件 页面ready 绑定事件， 执行代码
-  // $(function() {
-  //   $('.close-nav').on('click', function() {
-  //     history.go(-1);
-  //   })
-  // })*/
-
+  /* 页面加载完成事件 页面ready 绑定事件， 执行代码
+  $(function() {
+    $('.close-nav').on('click', function() {
+     history.go(-1);
+    })
+   })*/
   </script>
 </body>
 
